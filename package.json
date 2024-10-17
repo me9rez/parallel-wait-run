@@ -1,0 +1,67 @@
+{
+  "name": "parallel-wait-run",
+  "version": "0.0.1",
+  "description": "parallel-wait-run",
+  "type": "module",
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "license": "MIT",
+  "author": "LiuWenXing1996 lwx_redstone@163.com",
+  "keywords": [
+    "parallel"
+  ],
+  "bin": {
+    "parallel": "./bin/bin.mjs"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build -w",
+    "release": "unbag release",
+    "release-dry": "unbag release -d",
+    "test": "vitest",
+    "test-watch": " vitest -w",
+    "test-read": "tsx ./src/cli"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    }
+  },
+  "types": "./dist/types/index.d.ts",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.mjs",
+  "dependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/uuid": "^9.0.2",
+    "@types/yargs": "^17.0.33",
+    "bundle-require": "^5.0.0",
+    "concurrently": "^8.2.2",
+    "core-js-pure": "^3.38.1",
+    "detect-indent": "^7.0.1",
+    "detect-newline": "^4.0.1",
+    "execa": "^9.4.0",
+    "fs-extra": "^11.2.0",
+    "radash": "^12.1.0",
+    "ts-essentials": "^10.0.2",
+    "uuid": "^9.0.0",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.25.7",
+    "babel-plugin-polyfill-corejs3": "^0.10.6",
+    "tsx": "^4.19.1",
+    "vite": "^5.4.8",
+    "vite-plugin-babel": "^1.2.0",
+    "vite-plugin-dts": "^4.2.3",
+    "vitest": "^2.1.2"
+  }
+}
