@@ -48,7 +48,7 @@ export default defineConfig({
     dir: path.resolve(__dirname, "./src"),
   },
   build: {
-    sourcemap: false,
+    sourcemap: true,
     minify: false,
     lib: {
       entry: path.resolve(__dirname, "./src/index.ts"),
