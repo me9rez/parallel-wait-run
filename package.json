@@ -18,8 +18,7 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite build -w",
-    "release": "unbag release",
-    "release-dry": "unbag release -d",
+    "release": "release-it",
     "test": "vitest",
     "test-watch": " vitest -w",
     "test-read": "tsx ./src/cli",
@@ -65,6 +64,8 @@
     "@commitlint/types": "^19.4.0",
     "babel-plugin-polyfill-corejs3": "^0.10.6",
     "husky": "^9.1.6",
+    "release-it": "^17.10.0",
+    "release-it-pnpm": "^4.6.3",
     "tsx": "^4.19.1",
     "vite": "^5.4.8",
     "vite-plugin-babel": "^1.2.0",
