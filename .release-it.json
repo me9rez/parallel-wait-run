@@ -1,6 +1,6 @@
 {
     "plugins": {
-        "release-it-pnpm": {}
+ 
     },
     "git": {
         "commitMessage": "chore: release ${version}",
