@@ -23,6 +23,7 @@
     "test-watch": " vitest -w",
     "test-read": "tsx ./src/cli",
     "commit": "commit",
+    "preinstall": "npx only-allow pnpm",
     "prepare": "husky"
   },
   "exports": {
