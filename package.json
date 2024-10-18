@@ -18,7 +18,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite build -w",
-    "release": "release-it",
+    "release": "release-it && pnpm build && pnpm publish",
+    "ci:release": "release-it --ci && pnpm build && pnpm publish",
     "test": "vitest",
     "test-watch": " vitest -w",
     "test-read": "tsx ./src/cli",
