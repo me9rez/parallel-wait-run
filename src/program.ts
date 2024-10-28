@@ -111,11 +111,7 @@ export class Program {
             description: "group name ｜ 组名称",
             alias: "g",
             type: "string",
-          },
-          old: {
-            default: false,
-            type: "boolean",
-          },
+          }
         },
         async (args) => {
           const rootFormCli = (args.root as string) || undefined;
