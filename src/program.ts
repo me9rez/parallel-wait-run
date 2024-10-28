@@ -7,7 +7,6 @@ import fsExtra from "fs-extra/esm";
 import yargs from "yargs";
 import { assign, isFunction } from "radash";
 import { parallel } from "./parallel";
-import { wait } from "./wait";
 
 export class Program {
   constructor(params: {
@@ -113,6 +112,10 @@ export class Program {
             alias: "g",
             type: "string",
           },
+          old: {
+            default: false,
+            type: "boolean",
+          },
         },
         async (args) => {
           const rootFormCli = (args.root as string) || undefined;
@@ -134,7 +137,7 @@ export class Program {
           const parallelConfigFromCli = isFunction(
             parallelConfigMaybeFuncFromCli
           )
-            ? await parallelConfigMaybeFuncFromCli({ mode })
+            ? await parallelConfigMaybeFuncFromCli({ mode, root })
             : parallelConfigMaybeFuncFromCli;
           const parallelConfig = assign<ParallelConfig>(
             {
@@ -150,21 +153,6 @@ export class Program {
             config: parallelConfig,
             groupName: groupName,
           });
-        }
-      )
-      .command(
-        "wait",
-        "内部命令，利用此命令来达到脚本延迟执行功能",
-        {
-          filePath: {
-            alias: "f",
-            description: "要轮询检查的文件的路径",
-            type: "string",
-          },
-        },
-        async (args) => {
-          const { filePath = "" } = args;
-          await wait({ filePath });
         }
       );
 
