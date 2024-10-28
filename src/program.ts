@@ -111,7 +111,7 @@ export class Program {
             description: "group name ｜ 组名称",
             alias: "g",
             type: "string",
-          }
+          },
         },
         async (args) => {
           const rootFormCli = (args.root as string) || undefined;
@@ -145,6 +145,7 @@ export class Program {
               scripts: [],
             }
           );
+          parallelConfig.root = root ? root : parallelConfig.root;
           await parallel({
             config: parallelConfig,
             groupName: groupName,
