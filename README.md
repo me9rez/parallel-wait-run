@@ -9,7 +9,6 @@
 1. 在项目根目录添加配置文件 `parallel.config.ts`（也支持其他`JS`和`TS`扩展名）
 
 ```ts
-// parallel.config.ts
 import { defineConfig } from "parallel-wait-run";
 
 export default defineConfig({
@@ -17,20 +16,26 @@ export default defineConfig({
     {
       name: "dev",
       command: `dev command`,
+      wait: async () => {
+        sleep(1000);
+        return true;
+      },
     },
     {
       name: `unit-test`,
       command: `unit-test command`,
+      wait: async () => {
+        sleep(2000);
+        return true;
+      },
     },
   ],
 });
-
 ```
 
 也支持使用函数生成配置
 
 ```ts
-// parallel.config.ts
 import { defineConfig } from "parallel-wait-run";
 
 export default defineConfig(({ mode, root }) => {
@@ -47,13 +52,11 @@ export default defineConfig(({ mode, root }) => {
     ],
   };
 });
-
 ```
 
 异步函数也是支持的
 
 ```ts
-// parallel.config.ts
 import { defineConfig } from "parallel-wait-run";
 
 export default defineConfig(async ({ mode, root }) => {
@@ -70,7 +73,6 @@ export default defineConfig(async ({ mode, root }) => {
     ],
   };
 });
-
 ```
 
 2. 运行
@@ -105,13 +107,34 @@ npm run parallel -r /a/b/c
 
 ### -c, --config 
 
-指定配置文件，默认会在根路径下自动匹配`parallel.config.[ts,js,cjs,mjs]`, 如果设置为相对路径，则会以 `root`最为基础路径计算路径
+指定配置文件，默认会在根路径下自动匹配`parallel.config.[ts,js,cjs,mjs]`, 如果设置为相对路径，则会以 `root`为基础路径计算路径
 
 示例: 
 
 ```bash
 npm run parallel -c ./parallel.custom-config.ts
 ```
+### -m, --mode
+
+指定模式，一般在使用函数生成配置时使用，如
+
+```ts
+export default defineConfig(({ mode }) => {
+  if (mode === "dev") {
+    return {
+      scripts: [],
+    };
+  } else {
+    return {
+      scripts: [],
+    };
+  }
+});
+```
+
+### -g, --group
+
+指定运行某一组脚本
 
 ### -h, --help
 
@@ -120,14 +143,6 @@ npm run parallel -c ./parallel.custom-config.ts
 ### -v, --version
 
 显示版本号 
-
-### -m, --mode
-
-指定模式
-
-### -g, --group
-
-指定某一组脚本
 
 ## 配置选项
 
@@ -148,7 +163,7 @@ npm run parallel -c ./parallel.custom-config.ts
 
 - 类型: `array`
 - 是否必填: 是
-- 默认的脚本列表
+- 默认运行的脚本列表
 
 `script`的参数如下:
 
@@ -164,17 +179,12 @@ npm run parallel -c ./parallel.custom-config.ts
 - 是否必填: 是
 - 脚本的具体命令，例如`npm run dev`
 
-#### script.prefix.text 
 
-- 类型: `string`
+#### script.wait 
+
+- 类型: `() => MaybePromise<boolean>`
 - 是否必填: 否
-- 脚本命令日志输出的前缀，如果没有指定，则会使用`script.name`
-
-#### script.prefix.color 
-
-- 类型: `string`
-- 是否必填: 否
-- 脚本命令日志输出前缀的颜色，如果没有指定，则会随机指定一个颜色，支持的颜色格式`#FF8800`,会使用[`chalk.hex`](https://www.npmjs.com/package/chalk)来进行添加颜色
+- 当此函数执行完成后，运行脚本中的命令，如果返回`false`,则会退出整个进程的运行
 
 #### script.cwd 
 
@@ -194,11 +204,17 @@ type Env = {
 }
 ```
 
-#### script.wait 
+#### script.prefix.text 
 
-- 类型: `() => MaybePromise<boolean>`
+- 类型: `string`
 - 是否必填: 否
-- 当此函数执行完成后，运行脚本中的命令，如果返回`false`,则会退出整个进程的运行
+- 脚本命令日志输出的前缀，如果没有指定，则会使用`script.name`
+
+#### script.prefix.color 
+
+- 类型: `string`
+- 是否必填: 否
+- 脚本命令日志前缀的颜色，如果没有指定，则会随机指定生成一种颜色，支持的颜色格式`#FF8800`,会使用[`chalk.hex`](https://www.npmjs.com/package/chalk)来进行添加颜色
 
 ### groups
 
