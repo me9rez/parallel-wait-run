@@ -145,7 +145,7 @@ export class Program {
               scripts: [],
             }
           );
-          parallelConfig.root = root ? root : parallelConfig.root;
+          parallelConfig.root = args.root ? root : parallelConfig.root;
           await parallel({
             config: parallelConfig,
             groupName: groupName,

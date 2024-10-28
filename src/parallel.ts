@@ -44,6 +44,7 @@ export const parallel = async (params: {
   const commands = finalScripts.map((script) => {
     return new Command({
       ...script,
+      cwd: script.cwd || config.root || process.cwd(),
     });
   });
 
