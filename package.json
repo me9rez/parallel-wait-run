@@ -15,6 +15,8 @@
   "bin": {
     "parallel": "./bin/bin.mjs"
   },
+  "repository": "https://github.com/LiuWenXing1996/parallel-wait-run",
+  "homepage": "https://github.com/LiuWenXing1996/parallel-wait-run",
   "scripts": {
     "build": "vite build",
     "dev": "vite build -w",
