@@ -229,3 +229,7 @@ type Group = {
 ```
 
 `ParallelScripts`的相关参数参照上面的`scripts`选项
+
+## 致谢
+
+- 代码中的部分实现参考了[`concurrently`](https://www.npmjs.com/package/concurrently)，感谢[`concurrently`](https://www.npmjs.com/package/concurrently)
