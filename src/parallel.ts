@@ -30,6 +30,11 @@ export const getParallelScripts = async (params: {
   return [];
 };
 
+export const parallelMassages = {
+  emptyScripts:
+    "scripts length < 1, please check config.scripts or config.groups",
+};
+
 export const parallel = async (params: {
   config: ParallelConfig;
   groupName?: string;
@@ -40,6 +45,11 @@ export const parallel = async (params: {
     config: config,
     groupName,
   });
+
+
+  if (finalScripts.length < 1) {
+    throw new Error(parallelMassages.emptyScripts);
+  }
 
   const commands = finalScripts.map((script) => {
     return new Command({
