@@ -1,7 +1,12 @@
-import { ChildProcess, spawn, SpawnOptions } from "node:child_process";
+import { ChildProcess, SpawnOptions } from "node:child_process";
 import { MaybePromise } from "./utils";
 import chalk from "chalk";
 import supportsColor from "supports-color";
+import spawnCommand from "spawn-command";
+
+export const spawnCommandWrapper = {
+  func: (...rest: any) => spawnCommand(...rest),
+};
 
 export interface CommandConfig {
   command: string;
@@ -12,7 +17,7 @@ export interface CommandConfig {
   };
   cwd?: string;
   env?: Record<string, string>;
-  wait?: () => MaybePromise<boolean>;
+  wait?: (params: { log: (message: string) => void }) => MaybePromise<boolean>;
 }
 
 const randomColor = () => {
@@ -43,10 +48,12 @@ export class Command {
 
   log(text: string) {
     const prefix = this.logConfig.prefix;
+    let textToWrite = "";
     const logPrefix = chalk.hex(prefix.color)(`[${prefix.text}] `);
-    const textWithPrefix = `${logPrefix}${text}`;
-    const textToWrite = textWithPrefix.replaceAll("\n", (matched, i) => {
-      const isEnd = !textWithPrefix[i + 1];
+    textToWrite = `${logPrefix}${text}`;
+    textToWrite = textToWrite.endsWith("\n") ? textToWrite : `${textToWrite}\n`;
+    textToWrite = textToWrite.replaceAll("\n", (matched, i) => {
+      const isEnd = !textToWrite[i + 1];
       return isEnd ? matched : `${matched}${logPrefix}`;
     });
     process.stdout.write(textToWrite);
@@ -54,11 +61,16 @@ export class Command {
 
   async start() {
     const { command, env, wait, name, cwd } = this.config;
+    const log: (message: string) => void = (...rest) => {
+      this.log(...rest);
+    };
     const colorSupport = supportsColor.stdout;
     if (wait) {
-      this.log("wait ... \n");
+      log("wait ... ");
       try {
-        const canRun = await wait();
+        const canRun = await wait({
+          log,
+        });
         if (!canRun) {
           throw new Error(`${name} wait return ${canRun}`);
         }
@@ -79,11 +91,11 @@ export class Command {
     this.childProcess = childProcess;
     childProcess.stdout?.on("data", (data) => {
       const text = data.toString();
-      this.log(text);
+      log(text);
     });
     childProcess.stderr?.on("data", (data) => {
       const text = data.toString();
-      this.log(text);
+      log(text);
     });
   }
 }
@@ -92,12 +104,5 @@ export const customSpawn = (
   command: string,
   options: SpawnOptions
 ): ChildProcess => {
-  let file = "/bin/sh";
-  let args = ["-c", command];
-  if (process.platform === "win32") {
-    file = "cmd.exe";
-    args = ["/s", "/c", `"${command}"`];
-    options.windowsVerbatimArguments = true;
-  }
-  return spawn(file, args, options);
+  return spawnCommandWrapper.func(command, options);
 };
