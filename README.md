@@ -6,9 +6,22 @@
 
 # 文档
 
-## 快速开始
+## 开始
 
-1. 在项目根目录添加配置文件 `parallel.config.ts`（也支持其他`JS`和`TS`扩展名）
+1. 安装
+
+``` bash
+# npm
+npm install -D parallel-wait-run
+
+# pnpm
+pnpm add -D parallel-wait-run
+
+# yarn
+yarn add -D parallel-wait-run
+```
+
+2. 在项目根目录添加配置文件 `parallel.config.ts`（也支持其他`JS`和`TS`扩展名）
 
 ```ts
 import { defineConfig } from "parallel-wait-run";
@@ -77,21 +90,16 @@ export default defineConfig(async ({ mode, root }) => {
 });
 ```
 
-2. 运行
+3. 运行
 
 ``` bash
+# npm
 npm run parallel
-```
 
-使用`pnpm`
-
-``` bash
+# pnpm
 pnpm parallel
-```
 
-使用`yarn`
-
-``` bash
+# yarn
 yarn parallel
 ```
 
@@ -231,6 +239,10 @@ type Group = {
 ```
 
 `ParallelScripts`的相关参数参照上面的`scripts`选项
+
+## 例子
+
+- [示例仓库](https://github.com/LiuWenXing1996/parallel-example)
 
 ## 致谢
 
