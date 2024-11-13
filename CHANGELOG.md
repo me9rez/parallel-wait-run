@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.2.1](https://github.com/LiuWenXing1996/parallel-wait-run/compare/v0.2.0...v0.2.1) (2024-11-13)
+
 ## [0.2.0](https://github.com/LiuWenXing1996/parallel-wait-run/compare/v0.1.2...v0.2.0) (2024-11-13)
 
 ### Features
