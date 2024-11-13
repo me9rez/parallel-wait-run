@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.0](https://github.com/LiuWenXing1996/parallel-wait-run/compare/v0.1.2...v0.2.0) (2024-11-13)
+
+### Features
+
+* use spawnCommand replace spawn and add wait loger params ([c84d2ce](https://github.com/LiuWenXing1996/parallel-wait-run/commit/c84d2ce25cfc9cb0ef313071c627b5b2d60a0d10))
+
+### Bug Fixes
+
+* fix empty scripts error ([2714308](https://github.com/LiuWenXing1996/parallel-wait-run/commit/2714308894563bb113e8c54cdddbe67dac742e36))
+
 ## [0.1.2](https://github.com/LiuWenXing1996/parallel-wait-run/compare/v0.1.1...v0.1.2) (2024-11-03)
 
 ## [0.1.1](https://github.com/LiuWenXing1996/parallel-wait-run/compare/v0.1.0...v0.1.1) (2024-10-28)
