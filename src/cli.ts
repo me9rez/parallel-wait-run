@@ -1,4 +1,4 @@
-import { read } from "@/read";
+import { read } from "./read";
 
 async function start() {
   return read();

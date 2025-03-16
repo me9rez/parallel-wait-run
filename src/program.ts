@@ -1,9 +1,9 @@
 import { hideBin } from "yargs/helpers";
-import { ParallelConfig, ParallelConfigFunc } from "@/config";
+import type { ParallelConfig, ParallelConfigFunc } from "./config";
 import { bundleRequire } from "bundle-require";
 import { AbsolutePath } from "./utils";
 import path from "node:path";
-import fsExtra from "fs-extra/esm";
+import fsExtra from "fs-extra";
 import yargs from "yargs";
 import { assign, isFunction } from "radash";
 import { parallel } from "./parallel";

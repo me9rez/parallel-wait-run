@@ -1,19 +1,15 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "strict": true,
+    "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "emitDeclarationOnly": true,
-    "declaration": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "noEmitOnError": false,
-    "baseUrl": "./",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-    }
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./"
   },
   "exclude": [
     "node_modules"

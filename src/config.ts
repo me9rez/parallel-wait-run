@@ -1,5 +1,5 @@
-import { CommandConfig } from "./command";
-import { MaybePromise } from "./utils";
+import { type CommandConfig } from "./command";
+import { type MaybePromise } from "./utils";
 
 export interface ParallelConfig {
   root?: string;

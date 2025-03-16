@@ -1,6 +1,6 @@
 import { expect, test, describe } from "vitest";
-import { getParallelScripts, parallel, parallelMassages } from "./parallel";
-import { ParallelConfig } from "@/config";
+import { getParallelScripts, parallel, parallelMassages } from "../src/parallel";
+import { type ParallelConfig } from "../src/config";
 
 describe("getParallelScripts", () => {
   test("获取默认的scripts", async () => {

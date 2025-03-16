@@ -1,4 +1,4 @@
-import { ParallelConfig, ParallelScript } from "./config";
+import type { ParallelConfig, ParallelScript } from "./config";
 import { unSafeObjectShallowWrapper } from "./utils";
 import { isFunction } from "radash";
 import { Command } from "./command";

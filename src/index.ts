@@ -1,2 +1,2 @@
-export { defineConfig } from "@/config";
-export { read } from "@/read";
+export { defineConfig } from "./config";
+export { read } from "./read";

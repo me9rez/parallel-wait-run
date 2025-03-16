@@ -1,5 +1,5 @@
 import { test, describe, vi, expect } from "vitest";
-import { customSpawn, spawnCommandWrapper } from "./command";
+import { customSpawn, spawnCommandWrapper } from "../src/command";
 
 describe("customSpawn", () => {
   test("customSpawn", async () => {

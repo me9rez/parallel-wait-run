@@ -1,11 +1,11 @@
-import { ChildProcess, SpawnOptions } from "node:child_process";
-import { MaybePromise } from "./utils";
-import chalk from "chalk";
+import { ChildProcess, type SpawnOptions } from "node:child_process";
+import { type MaybePromise } from "./utils";
+import chalk from 'chalk';
 import supportsColor from "supports-color";
 import spawnCommand from "spawn-command";
 
 export const spawnCommandWrapper = {
-  func: (...rest: any) => spawnCommand(...rest),
+  func: (...rest: any[]) => spawnCommand(...rest) as ChildProcess,
 };
 
 export interface CommandConfig {
@@ -89,11 +89,11 @@ export class Command {
       },
     });
     this.childProcess = childProcess;
-    childProcess.stdout?.on("data", (data) => {
+    childProcess.stdout?.on("data", (data: any) => {
       const text = data.toString();
       log(text);
     });
-    childProcess.stderr?.on("data", (data) => {
+    childProcess.stderr?.on("data", (data: any) => {
       const text = data.toString();
       log(text);
     });
@@ -103,6 +103,6 @@ export class Command {
 export const customSpawn = (
   command: string,
   options: SpawnOptions
-): ChildProcess => {
+) => {
   return spawnCommandWrapper.func(command, options);
 };

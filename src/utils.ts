@@ -1,4 +1,4 @@
-import { DeepPartial } from "ts-essentials";
+import type{ DeepPartial } from "ts-essentials";
 import path from "node:path";
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
